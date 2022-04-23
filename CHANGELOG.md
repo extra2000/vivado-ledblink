@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/extra2000/vivado-ledblink/compare/v1.0.0...v1.1.0) (2022-04-23)
+
+
+### Features
+
+* **vivado:** add Block Design and PetaLinux ([6dc8261](https://github.com/extra2000/vivado-ledblink/commit/6dc82611a62e8a367fac58b23ac2c0f438ca5897))
+
+
+### Documentations
+
+* **README:** add PetaLinux instructions ([430492b](https://github.com/extra2000/vivado-ledblink/commit/430492bbb914cff61195406abf68a8b13ac91e1d))
+
 ## 1.0.0 (2022-04-23)
 
 
