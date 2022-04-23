@@ -34,3 +34,39 @@ Then, load the Vivado project:
 ```
 flatpak run com.github.corna.Vivado -mode gui ./ledblink/ledblink.xpr
 ```
+
+Generate XSA file required by Vitis and PetaLinux.
+
+
+## Build PetaLinux
+
+Fix permission issues:
+```
+podman unshare chown -R 1000:1000 ./petalinux
+chcon -R -v -t container_file_t ./vivado/run/ledblink
+```
+
+Create project:
+```
+podman run -it --rm -v ${PWD}/petalinux:${PWD}/petalinux:rw --workdir ${PWD}/petalinux --security-opt label=type:petalinux_builder.process localhost/extra2000/petalinux-builder:latest
+petalinux-create --type project --template zynq --name arty-z7-20
+exit
+```
+
+Build project:
+```
+podman run -it --rm -v ${PWD}/vivado:${PWD}/vivado:ro -v ${PWD}/petalinux:${PWD}/petalinux:rw --workdir ${PWD}/petalinux/arty-z7-20 --security-opt label=type:petalinux_builder.process localhost/extra2000/petalinux-builder:latest
+petalinux-config --get-hw-description ../../vivado/run/ledblink/
+petalinux-build
+petalinux-build --sdk
+petalinux-package --sysroot
+petalinux-package --boot --fsbl ./images/linux/zynq_fsbl.elf --fpga ./images/linux/system.bit --u-boot
+exit
+```
+
+Restore ownership:
+```
+podman unshare chown -R 0:0 ./petalinux/
+```
+
+Create SD card image.
