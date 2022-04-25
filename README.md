@@ -43,7 +43,7 @@ Generate XSA file required by Vitis and PetaLinux.
 Fix permission issues:
 ```
 podman unshare chown -R 1000:1000 ./petalinux
-chcon -R -v -t container_file_t ./vivado/run/ledblink
+chcon -R -v -t container_file_t ./petalinux ./vivado/run/ledblink
 ```
 
 Create project:
