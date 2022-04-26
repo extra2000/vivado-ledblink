@@ -1,5 +1,17 @@
 # Changelog
 
+### [1.1.1](https://github.com/extra2000/vivado-ledblink/compare/v1.1.0...v1.1.1) (2022-04-26)
+
+
+### Code Refactoring
+
+* **vivado:** remove `Processor System Reset` IP ([d03a9b3](https://github.com/extra2000/vivado-ledblink/commit/d03a9b3ffa65d9deae249b7d3bceb3f4e7f22b86))
+
+
+### Documentations
+
+* **README:** label `./petalinux` as `container_file_t` ([82997b1](https://github.com/extra2000/vivado-ledblink/commit/82997b159bd62a731041c88e1e8d263cdd776da7))
+
 ## [1.1.0](https://github.com/extra2000/vivado-ledblink/compare/v1.0.0...v1.1.0) (2022-04-23)
 
 
