@@ -1,5 +1,29 @@
 # Changelog
 
+## [2.0.0](https://github.com/extra2000/vivado-ledblink/compare/v1.1.1...v2.0.0) (2022-05-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* LED blink timing and duration has been redesigned
+* **constr:** constraint file has changed into example file to allow user customization
+
+### Styles
+
+* **constr:** re-order pins and voltage ([7f0f5ce](https://github.com/extra2000/vivado-ledblink/commit/7f0f5ce8f8e9e9840f54d378049cc637e3010ba4))
+
+
+### Documentations
+
+* **README:** add instruction to create constr file ([160cef9](https://github.com/extra2000/vivado-ledblink/commit/160cef918fd32b2a5f81ca2401c84c0b8b1cb330))
+* **README:** update description ([7d48a59](https://github.com/extra2000/vivado-ledblink/commit/7d48a59ac850187d72e4b674c9243582a1c4c218))
+
+
+### Code Refactoring
+
+* **constr:** change to example file to allow user customization ([8bb133f](https://github.com/extra2000/vivado-ledblink/commit/8bb133f5e32d2eca86b383ddaec07cb623223e6d))
+* redesign to LED blink every 1s for 0.1s ([2434ab2](https://github.com/extra2000/vivado-ledblink/commit/2434ab28bee1d12a96881d1e04560fc776109053))
+
 ### [1.1.1](https://github.com/extra2000/vivado-ledblink/compare/v1.1.0...v1.1.1) (2022-04-26)
 
 
