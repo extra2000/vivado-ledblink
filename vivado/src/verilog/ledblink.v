@@ -1,29 +1,55 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// When using 25th bit value, the LED will blink every 0.54 seconds
-// if the clock speed 125MHz. Calculation as follows:
-//     Given clock speed clk_i = 125MHz (or 125*pow(10,6)Hz),
-//     Blink frequency = 1 / ((pow(2,25) / (125*pow(10,6))) * 2)
-//                     = 1.86Hz
-//     Blink frequency in seconds = 1 / 1.86Hz
-//                                = 0.54s
-//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567
+//        1         2         3         4         5         6         7         8         9
+//------------------------------------------------------------------------------------------------
+// LED Blink module that blinks every 1.000000000000 second for 0.100000000000 second
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-module ledblink(
-        clk_i,
-        led_o
-    );
-    input clk_i;
-    output led_o;
+module ledblink #(
+  parameter reg [26:0] CLK_FREQ = 125000000,  // 125MHz
+  parameter reg [23:0] T_100_MS = $ceil((0.100000000 * CLK_FREQ)),
+  parameter reg [26:0] T_1000_MS = $ceil((1.000000000 * CLK_FREQ))
+) (
+  input clk_i,
+  output reg led_o
+);
 
-    wire clk_i;
+  initial begin
+    led_o = 0;
+  end
 
-    reg [32:0] counter = 0;
+  ////////////////////////////////////////////////////////////////////////////////////////////////
+  // State Machine
+  ////////////////////////////////////////////////////////////////////////////////////////////////
+  reg [26:0] cnt = 0;
+  reg [1:0] state = 0;
 
-    always @(posedge clk_i) begin
-        counter <= counter + 1;
-    end
+  always @(negedge clk_i) begin
+    case(state)
+      0: begin
+        if (cnt >= T_100_MS) begin
+          led_o <= 0;
+          state <= state + 1;
+          cnt <= cnt + 1;
+        end else begin
+          led_o <= 1;
+          cnt <= cnt + 1;
+        end
+      end
+      1: begin
+        if (cnt >= T_1000_MS) begin
+          led_o <= 1;
+          state <= 0;
+          cnt <= 1;
+        end else begin
+          cnt <= cnt + 1;
+        end
+      end
+      default: begin
+      end
+    endcase
+  end
 
-    assign led_o = counter[25]; // using 25th bit value
 endmodule
